@@ -1,0 +1,18 @@
+/* Contador */
+.contador {
+    font-size: 4em;
+}
+
+/* Clases para los valores del contador */
+
+.negativo {
+    color: red;
+}
+
+.positivo {
+    color: green;
+}
+
+.neutral {
+    color: #000;
+}

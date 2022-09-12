@@ -5,12 +5,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="./styles/main.css" />
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
         />
     </head>
     <body>
-        <script src=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <main>
+            <div class="container d-flex flex-column align-items-center">
+                <h1 class="main-title text-center">
+                    Prueba Tecnica - Contador
+                </h1>
+                <h1 class="contador text-center mt-4" id="showContador">0</h1>
+                <div class="buttons d-flex gap-4">
+                    <button class="btn btn-danger" id="btnDisminuir">
+                        Disminuir
+                    </button>
+                    <button class="btn btn-primary" id="btnAumentar">
+                        Aumentar
+                    </button>
+                </div>
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./scripts/app.js"></script>
     </body>
 </html>
