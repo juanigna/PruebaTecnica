@@ -1,9 +1,12 @@
 //Variables
 const btnAumentar = document.querySelector('#btnAumentar');
 const btnDisminuir = document.querySelector('#btnDisminuir');
+const btnReset = document.querySelector('#btnReset');
+const btnCrono = document.querySelector('#btnCronometro');
 const contador = document.querySelector('#showContador');
+let running = false;
 let newContador = 0;
-
+let id;
 //EventListener
 
 EventListeners();
@@ -24,8 +27,24 @@ function contadorLogica(e) {
     } else if (e.target.id == 'btnDisminuir') {
         newContador--;
         valoresContador(newContador);
+    } else if (e.target.id == 'btnReset') {
+        newContador = 0;
+        valoresContador(newContador);
+    } else if (e.target.id == 'btnCronometro') {
+        if (!running) {
+            id = setInterval(() => {
+                crono();
+            }, 1000);
+
+            running = true;
+        } else {
+            running = false;
+            clearInterval(id);
+            btnCrono.textContent = 'Iniciar cronometro';
+        }
     }
     contador.textContent = newContador;
+    esteticaBtns();
 }
 
 function valoresContador(valor) {
@@ -43,3 +62,18 @@ function valoresContador(valor) {
         contador.classList.remove('negativo');
     }
 }
+
+function esteticaBtns() {
+    if (newContador < 0) {
+        btnCrono.disabled = true;
+    } else {
+        btnCrono.disabled = false;
+    }
+}
+
+const crono = () => {
+    newContador++;
+    btnCrono.textContent = 'Detener';
+    contador.textContent = newContador;
+    valoresContador(newContador);
+};
