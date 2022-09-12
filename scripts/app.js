@@ -69,6 +69,16 @@ function esteticaBtns() {
     } else {
         btnCrono.disabled = false;
     }
+
+    if (running) {
+        btnAumentar.disabled = true;
+        btnDisminuir.disabled = true;
+        btnReset.disabled = true;
+    } else {
+        btnAumentar.disabled = false;
+        btnDisminuir.disabled = false;
+        btnReset.disabled = false;
+    }
 }
 
 const crono = () => {
