@@ -45,6 +45,21 @@
 .vueltas-seccion ul li {
     width: 100%;
     margin: 0 auto;
+    position: relative;
+}
+
+.notaVuelta {
+    position: absolute;
+    top: -20px;
+    right: -150px;
+    display: none;
+    text-align: center;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    -webkit-box-shadow: 13px 10px 32px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 13px 10px 32px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 13px 10px 32px 0px rgba(0, 0, 0, 0.4);
 }
 
 .bodyColorNew {

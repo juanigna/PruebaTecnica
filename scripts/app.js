@@ -184,10 +184,20 @@ function vueltasCrono() {
     if (numeroVuelta == 1) {
         diff = 0;
     }
-    li.innerHTML = `Vuelta n°: ${numeroVuelta} - Valor: ${newContador} - Diferencia con vuelta anterior: ${diff}`;
+    li.innerHTML = `
+        Vuelta n°: ${numeroVuelta} - Valor: ${newContador} - Diferencia con vuelta anterior: ${diff}
+        <input type="text" class="notaVuelta"  placeholder="Ingrese una nota"/>
+    `;
+
     ul.appendChild(li);
 
     vueltasContainer.appendChild(ul);
+    li.addEventListener('mouseover', (e) => {
+        agregarNota(e);
+    });
+    li.addEventListener('mouseleave', (e) => {
+        desaparecerNota(e);
+    });
     numeroVuelta += 1;
 }
 
@@ -196,4 +206,22 @@ function borrarVueltas() {
     ul.innerHTML = ``;
     vueltaValor = 0;
     numeroVuelta = 1;
+}
+
+function agregarNota(e) {
+    const input = e.target.childNodes[1];
+    if (input == undefined) {
+        return;
+    }
+    input.style.display = 'block';
+    input.readonly = false;
+}
+
+function desaparecerNota(e) {
+    const input = e.target.childNodes[1];
+    if (input == undefined) {
+        return;
+    }
+    input.style.display = 'none';
+    input.readonly = true;
 }
