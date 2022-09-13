@@ -82,6 +82,14 @@ function contadorLogica(e) {
             if (newContador > 0) {
                 temp = setInterval(() => {
                     temporizador();
+                    if (newContador == 0) {
+                        clearInterval(temp);
+                        clearInterval(tempColor);
+                        document.body.style.backgroundColor = 'white';
+                        document.body.classList.remove('bodyColorNew');
+                        restablecerTemporizador();
+                        runningTemp = false;
+                    }
                 }, 1000);
                 tempColor = setInterval(() => {
                     document.body.classList.toggle('bodyColorNew');
