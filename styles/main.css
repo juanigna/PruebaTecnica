@@ -16,3 +16,32 @@
 .neutral {
     color: #000;
 }
+
+/* Seccion vueltas estilos */
+
+.vueltas-seccion {
+    margin-top: 3em;
+    background-color: rgb(189, 148, 148);
+    padding: 1em;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.vueltas-seccion ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0.2em !important;
+    margin: 0 auto !important;
+}
+
+.vueltas-seccion ul li {
+    width: 100%;
+    margin: 0 auto;
+}
