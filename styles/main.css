@@ -46,3 +46,8 @@
     width: 100%;
     margin: 0 auto;
 }
+
+.bodyColorNew {
+    background-color: #d50000 !important;
+    color: #fff;
+}

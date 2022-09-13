@@ -5,6 +5,7 @@ const btnAumentar = document.querySelector('#btnAumentar');
 const btnDisminuir = document.querySelector('#btnDisminuir');
 const btnReset = document.querySelector('#btnReset');
 const btnCrono = document.querySelector('#btnCronometro');
+const btnTemporizador = document.querySelector('#btnTemporizador');
 const btnVuelta = document.querySelector('#btnVuelta');
 const btnBorrarVuelta = document.querySelector('#btnBorrarVueltas');
 
@@ -21,8 +22,11 @@ const ul = document.createElement('ul');
 //Variables varias
 let numeroVuelta = 1;
 let running = false;
+let runningTemp = false;
 let newContador = 0;
 let id;
+let temp;
+let tempColor;
 let vueltaValor = 0;
 //EventListener
 
@@ -30,7 +34,10 @@ EventListeners();
 
 function EventListeners() {
     //Evento para detectar los botonos
-    // document.addEventListener('DOMContentLoaded', () => {});
+    document.addEventListener('DOMContentLoaded', () => {
+        esteticaBtns();
+        btnTempoFuncionalidad();
+    });
     document.addEventListener('click', (e) => {
         contadorLogica(e);
     });
@@ -67,12 +74,33 @@ function contadorLogica(e) {
         } else {
             running = false;
             clearInterval(id);
-            btnCrono.textContent = 'Iniciar cronometro';
+            restablecerCronometro();
             btnVuelta.disabled = true;
+        }
+    } else if (e.target.id == 'btnTemporizador') {
+        if (!runningTemp) {
+            if (newContador > 0) {
+                temp = setInterval(() => {
+                    temporizador();
+                }, 1000);
+                tempColor = setInterval(() => {
+                    document.body.classList.toggle('bodyColorNew');
+                }, 2000);
+                runningTemp = true;
+            }
+        } else {
+            runningTemp = false;
+            clearInterval(temp);
+            clearInterval(tempColor);
+            restablecerTemporizador();
+            document.body.style.backgroundColor = 'white';
+            document.body.classList.remove('bodyColorNew');
+            btnTemporizador.disabled = false;
         }
     }
     contador.textContent = newContador;
     esteticaBtns();
+    btnTempoFuncionalidad();
 }
 
 //Funcion encargada de la estetica del contador
@@ -101,12 +129,43 @@ function esteticaBtns() {
     }
 }
 
+const btnTempoFuncionalidad = () => {
+    if (newContador <= 0 || running == true) {
+        btnTemporizador.disabled = true;
+    } else {
+        btnTemporizador.disabled = false;
+    }
+};
+
 //Funcion encargada de la funcionalidad del cronometro
 const crono = () => {
     newContador++;
     btnCrono.textContent = 'Detener';
+    btnCrono.classList.remove('btn-success');
+    btnCrono.classList.add('btn-danger');
     contador.textContent = newContador;
     valoresContador(newContador);
+};
+
+const restablecerCronometro = () => {
+    btnCrono.textContent = 'Iniciar cronometro';
+    btnCrono.classList.remove('btn-danger');
+    btnCrono.classList.add('btn-success');
+};
+
+const temporizador = () => {
+    newContador--;
+    btnTemporizador.textContent = 'Temporizador OK';
+    btnTemporizador.classList.remove('btn-success');
+    btnTemporizador.classList.add('btn-danger');
+    contador.textContent = newContador;
+    valoresContador(newContador);
+};
+
+const restablecerTemporizador = () => {
+    btnTemporizador.textContent = 'Iniciar Temporizador';
+    btnTemporizador.classList.remove('btn-danger');
+    btnTemporizador.classList.add('btn-success');
 };
 
 //Funcion encargada de visualizar las vueltas del cronometro
