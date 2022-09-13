@@ -39,6 +39,7 @@
     list-style-type: none;
     padding: 0.2em !important;
     margin: 0 auto !important;
+    gap: 2em;
 }
 
 .vueltas-seccion ul li {

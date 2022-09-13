@@ -6,6 +6,7 @@ const btnDisminuir = document.querySelector('#btnDisminuir');
 const btnReset = document.querySelector('#btnReset');
 const btnCrono = document.querySelector('#btnCronometro');
 const btnVuelta = document.querySelector('#btnVuelta');
+const btnBorrarVuelta = document.querySelector('#btnBorrarVueltas');
 
 //Variable del contador
 const contador = document.querySelector('#showContador');
@@ -22,7 +23,7 @@ let numeroVuelta = 1;
 let running = false;
 let newContador = 0;
 let id;
-
+let vueltaValor = 0;
 //EventListener
 
 EventListeners();
@@ -36,6 +37,11 @@ function EventListeners() {
 
     btnVuelta.addEventListener('click', () => {
         vueltasCrono();
+        vueltaValor = newContador;
+    });
+
+    btnBorrarVuelta.addEventListener('click', () => {
+        borrarVueltas();
     });
 }
 
@@ -107,9 +113,20 @@ const crono = () => {
 function vueltasCrono() {
     const li = document.createElement('li');
 
-    li.innerHTML = `Vuelta n°: ${numeroVuelta} - Valor: ${newContador}`;
+    let diff = newContador - vueltaValor;
+    if (numeroVuelta == 1) {
+        diff = 0;
+    }
+    li.innerHTML = `Vuelta n°: ${numeroVuelta} - Valor: ${newContador} - Diferencia con vuelta anterior: ${diff}`;
     ul.appendChild(li);
 
     vueltasContainer.appendChild(ul);
     numeroVuelta += 1;
+}
+
+//Funcion encargada de borrar las vueltas
+function borrarVueltas() {
+    ul.innerHTML = ``;
+    vueltaValor = 0;
+    numeroVuelta = 1;
 }
