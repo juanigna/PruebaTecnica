@@ -57,6 +57,7 @@ EventListeners();
 function EventListeners() {
     //Evento para detectar los botonos
     document.addEventListener('DOMContentLoaded', () => {
+        valoresTiempo();
         esteticaBtns();
         btnTempoFuncionalidad();
     });
@@ -152,9 +153,13 @@ function Logica(e) {
         esteticaBtns();
         btnTempoFuncionalidad();
     } else {
+        //Todo lo que sucede aca abajo es en el modo timepo
         btnTemporizador.textContent = 'Iniciar Tiempo';
         btnTemporizador.disabled = false;
+        clearInterval(temp);
+        clearInterval(tempColor);
         if (e.target.id == 'btnTemporizador') {
+            //En el caso de usar el temporizador
             if (!runnigTiempo) {
                 empezarTiempo();
                 btnTemporizador.textContent = 'Finalizar Tiempo';
@@ -169,6 +174,20 @@ function Logica(e) {
                 btnTemporizador.classList.add('btn-success');
                 btnTemporizador.classList.remove('btn-danger');
             }
+        }
+        if (e.target.id == 'btnAumentar') {
+            //En el caso de querer aumentar
+            segundos += 1;
+            if (segundos == 59) {
+                segundos = 0;
+                minutos++;
+            } else if (minutos == 59) {
+                segundos = 0;
+                minutos = 0;
+                horas++;
+            }
+            cambiarTiempo();
+            console.log(segundos);
         }
     }
 }
@@ -199,6 +218,7 @@ function esteticaBtns() {
     }
 }
 
+//funcion encargada de deshabilitar el boton
 const btnTempoFuncionalidad = () => {
     if (newContador <= 0 || running == true) {
         btnTemporizador.disabled = true;
@@ -223,6 +243,7 @@ const restablecerCronometro = () => {
     btnCrono.classList.add('btn-success');
 };
 
+//Funcion encargada de el temporizador en modo contador
 const temporizador = () => {
     newContador--;
     btnTemporizador.textContent = 'Temporizador OK';
@@ -232,6 +253,7 @@ const temporizador = () => {
     valoresContador(newContador);
 };
 
+//Funcion que restablece el temporizadoraaa
 const restablecerTemporizador = () => {
     btnTemporizador.textContent = 'Iniciar Temporizador';
     btnTemporizador.classList.remove('btn-danger');
@@ -263,6 +285,7 @@ function vueltasCrono() {
     numeroVuelta += 1;
 }
 
+//Funcion encargada del marcador de vueltas en el modo tiempo
 function vueltasTiempo() {
     const li = document.createElement('li');
 
@@ -290,7 +313,11 @@ function vueltasTiempo() {
         console.log(newSegundo);
     }
     li.innerHTML = `
-        Vuelta n°: ${numeroVuelta} - Valor: ${horas}:${minutos}:${segundos} - Diferencia con vuelta anterior: ${diff}
+        Vuelta n°: ${numeroVuelta} - Valor: ${
+        horas > 9 ? horas : '0' + horas
+    }:${minutos > 9 ? minutos : '0' + minutos}:${
+        segundos > 9 ? segundos : '0' + segundos
+    } - Diferencia con vuelta anterior: ${diff}
         <input type="text" class="notaVuelta"  placeholder="Ingrese una nota"/>
     `;
 
@@ -313,6 +340,7 @@ function borrarVueltas() {
     numeroVuelta = 1;
 }
 
+//Funcion encargada de la funcionalidad agregar notas
 function agregarNota(e) {
     const input = e.target.childNodes[1];
     if (input == undefined) {
@@ -322,6 +350,7 @@ function agregarNota(e) {
     input.readonly = false;
 }
 
+//Funcion que hace desaparecer la nota
 function desaparecerNota(e) {
     const input = e.target.childNodes[1];
     if (input == undefined) {
@@ -331,6 +360,7 @@ function desaparecerNota(e) {
     input.readonly = true;
 }
 
+//funcion encargada de visualizar la seccion correcta
 function cargarModo() {
     if (modo == 'contador') {
         contadorSeccion.style.display = 'block';
@@ -341,18 +371,21 @@ function cargarModo() {
     }
 }
 
+//Funcion que asigna los valores a las h-m-s
 function valoresTiempo() {
     horas = Number(horaInput.value);
     minutos = Number(minutosInput.value);
     segundos = Number(segundosInput.value);
 }
 
+//Funcion que establce el valor adecuado al tiempo
 function cambiarTiempo() {
     horaInput.value = horas > 9 ? horas : '0' + horas;
     minutosInput.value = minutos > 9 ? minutos : '0' + minutos;
     segundosInput.value = segundos > 9 ? segundos : '0' + segundos;
 }
 
+//Funcion encargada una vezx funciona el temporizador
 function run() {
     if (segundos > 0) {
         segundos--;
@@ -371,10 +404,12 @@ function run() {
     cambiarTiempo();
 }
 
+//Intervalo principal en el temporizador
 function empezarConteo() {
     intervalTiempo = setInterval(run, 1000);
 }
 
+//Funcion principal del temporizador en el modo tiempo
 function empezarTiempo() {
     valoresTiempo();
     cambiarTiempo();
