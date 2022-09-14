@@ -17,7 +17,45 @@
                 <h1 class="main-title text-center">
                     Prueba Tecnica - Contador
                 </h1>
-                <h1 class="contador text-center mt-4" id="showContador">0</h1>
+                <div class="modoRadios">
+                    <label for="contador">Contador</label>
+                    <input
+                        type="radio"
+                        name="modo"
+                        id="radioContador"
+                        checked="checked"
+                    />
+                    <label for="radioTiempo">Tiempo</label>
+                    <input type="radio" name="modo" id="radioTiempo" />
+                </div>
+                <div id="contadorSeccion">
+                    <h1 class="contador text-center mt-4" id="showContador">
+                        0
+                    </h1>
+                </div>
+                <div id="tiempoSeccion" class="tiempoSeccion">
+                    <input
+                        class="number"
+                        type="text"
+                        maxlength="2"
+                        value="00"
+                        id="horas"
+                    /><span>hs</span
+                    ><input
+                        class="number"
+                        type="text"
+                        maxlength="2"
+                        value="00"
+                        id="minutos"
+                    /><span>min</span
+                    ><input
+                        class="number"
+                        type="text"
+                        maxlength="2"
+                        value="00"
+                        id="segundos"
+                    /><span>sec</span>
+                </div>
                 <div class="buttons d-flex gap-4">
                     <button class="btn btn-danger" id="btnDisminuir">
                         Disminuir

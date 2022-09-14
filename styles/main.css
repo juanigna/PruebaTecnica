@@ -66,3 +66,25 @@
     background-color: #d50000 !important;
     color: #fff;
 }
+
+.clock {
+    font-size: 32px;
+    text-shadow: -1px 0px 15px rgba(0, 0, 0, 0.25);
+    color: black;
+}
+
+.number {
+    display: inline-block;
+    width: 140px;
+    font-size: 128px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-shadow: -1px 0px 15px rgba(37, 27, 27, 0.25);
+    border: none;
+    color: black;
+    background-color: transparent;
+}
+
+.tiempoSeccion {
+    display: none;
+}
