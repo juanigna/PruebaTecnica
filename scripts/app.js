@@ -153,6 +153,7 @@ function Logica(e) {
         esteticaBtns();
         btnTempoFuncionalidad();
     } else {
+        valoresTiempo();
         //Todo lo que sucede aca abajo es en el modo timepo
         btnTemporizador.textContent = 'Iniciar Tiempo';
         btnTemporizador.disabled = false;
@@ -187,7 +188,11 @@ function Logica(e) {
                 horas++;
             }
             cambiarTiempo();
-            console.log(segundos);
+        }
+        if (e.target.id == 'btnReset') {
+            horaInput.value = '0' + 0;
+            minutosInput.value = '0' + 0;
+            segundosInput.value = '0' + 0;
         }
     }
 }
@@ -307,6 +312,9 @@ function vueltasTiempo() {
                 ? newSegundo - segundos
                 : '0' + (newSegundo - segundos)
         }`;
+        if (horas > newHora || minutos > newMinuto || segundos > newSegundo) {
+            diff = `Valor negativo`;
+        }
         newHora = horas;
         newMinuto = minutos;
         newSegundo = segundos;
